@@ -1,11 +1,45 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Box } from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+import authUtils from '../../utils/authUtils'
+import Loading from '../common/Loading';
+import Sidebar from '../common/Sidebar';
 
 const AppLayout = () => {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    checkAuth()
+  }, [navigate])
+
+  const checkAuth = async () => {
+    const user = await authUtils.isAuthenticated()
+    if (!user) {
+      navigate('/login')
+    } else {
+      // save user
+      setLoading(false)
+    }
+  }
+
   return (
-    <div>
-      <Outlet />
-    </div>
+    loading ? (
+      <Loading fullHeight />
+    ) : (
+      <Box sx={{
+        display: 'flex'
+      }}>
+        <Sidebar />
+        <Box sx={{
+          flexGrow: 1,
+          p: 1,
+          width: 'max-content'
+        }}>
+          <Outlet />
+        </Box>
+      </Box>
+    )
   )
 }
 
