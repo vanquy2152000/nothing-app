@@ -6,7 +6,9 @@ const getToken = () => localStorage.getItem('token')
 
 const axiosClient = axios.create({
     baseURL: baseUrl,
-    paramsSerializer: params => queryString.stringify({ params })
+    paramsSerializer: {
+        serialize: params => queryString.stringify(params)
+    }
 })
 
 axiosClient.interceptors.request.use(async config => {
@@ -19,10 +21,11 @@ axiosClient.interceptors.request.use(async config => {
     }
 })
 
-axiosClient.interceptors.response.use(response => {
+axiosClient.interceptors.response.use((response) => {
     if (response && response.data) return response.data
     return response
 }, err => {
+    console.log("check err axios :", err)
     if (!err.response) {
         return alert(err)
     }
