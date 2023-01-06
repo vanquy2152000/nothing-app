@@ -30,10 +30,12 @@ exports.updatePosition = async (req, res) => {
     try {
         for (const key in boards.reverse()) {
             const board = boards[key]
-            await Board.findByIdAndUpdate(
+            const res = await Board.findByIdAndUpdate(
                 board.id,
                 { $set: { position: key } }
             )
+            console.log(res)
+            return res
         }
 
         res.status(200).json('updated')
@@ -56,6 +58,49 @@ exports.getOne = async (req, res) => {
         board._doc.sections = sections
         res.status(200).json(board)
 
+    } catch (err) {
+        res.status(500).json(err)
+    }
+}
+
+exports.update = async (req, res) => {
+    const { boardId } = req.params
+    const { title, description, favourite } = req.body
+
+    try {
+        // place holder
+        if (title === '') req.body.title = 'Untitled'
+        if (description === '') req.body.description = 'Add description here'
+        // tim vi tri do tu id
+        const currentBoard = await Board.findById(boardId)
+        if (!currentBoard) return res.status(404).json('Board not found')
+
+        if (favourite !== undefined && currentBoard.favourite !== favourite) {
+            const favourites = await Board.find({
+                user: currentBoard.user,
+                favourite: true,
+                _id: { $ne: boardId }
+            })
+            if (favourite) {
+                req.body.favouritePosition = favourites.length > 0 ? favourites.length : 0
+            } else {
+                for (const key in favourites) {
+                    console.log("check key:", key)
+                    const element = favourites[key]
+                    await Board.findByIdAndUpdate(
+                        element.id,
+                        { $set: { favouritePosition: key } }
+                    )
+                }
+            }
+        }
+
+        const board = await Board.findByIdAndUpdate(
+            boardId,
+            { $set: req.body }
+        )
+
+        res.status(200).json(board)
     } catch (err) {
         res.status(500).json(err)
     }
