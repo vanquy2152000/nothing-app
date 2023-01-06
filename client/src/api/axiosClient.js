@@ -25,7 +25,6 @@ axiosClient.interceptors.response.use((response) => {
     if (response && response.data) return response.data
     return response
 }, err => {
-    console.log("check err axios :", err)
     if (!err.response) {
         return alert(err)
     }

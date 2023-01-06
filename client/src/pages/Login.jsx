@@ -61,7 +61,7 @@ const Login = () => {
         component='form'
         sx={{ mt: 1 }}
         onSubmit={handleSubmit}
-        onValidate
+        noValidate
       >
         <TextField
           margin='normal'
