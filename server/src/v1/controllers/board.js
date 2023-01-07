@@ -100,7 +100,7 @@ exports.update = async (req, res) => {
             { $set: req.body }
         )
 
-        res.status(200).json(board)
+        res.status(201).json(board)
     } catch (err) {
         res.status(500).json(err)
     }
