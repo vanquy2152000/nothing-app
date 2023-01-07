@@ -60,7 +60,14 @@ const Nothing = (props) => {
     }
 
     const createTask = async (sectionId) => {
+        // try {
+        //     const task = await taskApi.create(boardId, { sectionId })
+        //     const newData = [...data]
+        //     const index = newData.findIndex(e => e.id === sectionId)
 
+        // } catch (err) {
+        //     alert(err)
+        // }
     }
     return (
         <>
@@ -149,25 +156,26 @@ const Nothing = (props) => {
                                                                         marginBottom: '10px',
                                                                         cursor: snapshot.isDragging ? 'grab' : 'pointer!important'
                                                                     }}
+
                                                                 >
-                                                                    <Typography>
-                                                                        {task.title === '' ? 'Untitled' : task.title}
-                                                                    </Typography>
-                                                                </Card>
-                                                            )}
-                                                        </Draggable>
-                                                    ))
+                                                            <Typography>
+                                                                {task.title === '' ? 'Untitled' : task.title}
+                                                            </Typography>
+                                                        </Card>
+                                                    )}
+                                            </Draggable>
+                                            ))
                                                 }
-                                                {provided.placeholder}
-                                            </Box>
+                                            {provided.placeholder}
+                                        </Box>
                                         </Box>
                                     )}
-                                </Droppable>
+                            </Droppable>
                             </div>
-                        ))
+                ))
                     }
-                </Box>
-            </DragDropContext>
+            </Box>
+        </DragDropContext>
         </>
     )
 }
