@@ -41,7 +41,7 @@ router.put(
             return Promise.reject('invalid board id')
         } else return Promise.resolve
     }),
-    body('taskId').custom(value => {
+    param('taskId').custom(value => {
         if (!validation.isObjectId(value)) {
             return Promise.reject('invalid task id')
         } else return Promise.resolve
@@ -58,7 +58,7 @@ router.delete(
             return Promise.reject('invalid board id')
         } else return Promise.resolve
     }),
-    body('taskId').custom(value => {
+    param('taskId').custom(value => {
         if (!validation.isObjectId(value)) {
             return Promise.reject('invalid task id')
         } else return Promise.resolve

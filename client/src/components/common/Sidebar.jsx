@@ -113,7 +113,7 @@ const Sidebar = () => {
         </ListItem>
         <Box sx={{ padding: '10px' }} />
         <FavouriteList />
-        
+
         <Box sx={{ padding: '10px' }} />
         <ListItem>
           <Box sx={{

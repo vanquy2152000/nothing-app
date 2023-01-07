@@ -42,7 +42,6 @@ exports.delete = async (req, res) => {
                 { $set: { position: key } }
             )
         }
-
         res.status(200).json('deleted')
     } catch (err) {
         res.status(500).json(err)
