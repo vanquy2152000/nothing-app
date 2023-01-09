@@ -21,11 +21,13 @@ const Sidebar = () => {
 
   const sidebarWidth = 250
 
+  // console.log("check user sidebar", user)
+  // console.log("check user boards", boards)
+
   useEffect(() => {
     const getBoards = async () => {
       try {
         const res = await boardApi.getAll()
-
         dispatch(setBoards(res))
       } catch (err) {
         alert(err)
@@ -50,6 +52,8 @@ const Sidebar = () => {
   }
 
   const onDragEnd = async ({ source, destination }) => {
+    console.log("check source : ", source)
+    console.log("check destination : ", destination)
     const newList = [...boards]
     const [removed] = newList.splice(source.index, 1)
     newList.splice(destination.index, 0, removed)

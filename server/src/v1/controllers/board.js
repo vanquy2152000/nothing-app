@@ -27,15 +27,14 @@ exports.getAll = async (req, res) => {
 
 exports.updatePosition = async (req, res) => {
     const { boards } = req.body
+
     try {
         for (const key in boards.reverse()) {
             const board = boards[key]
-            const res = await Board.findByIdAndUpdate(
+            await Board.findByIdAndUpdate(
                 board.id,
                 { $set: { position: key } }
             )
-            console.log(res)
-            return res
         }
 
         res.status(200).json('updated')

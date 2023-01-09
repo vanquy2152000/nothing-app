@@ -42,7 +42,6 @@ const FavouriteList = () => {
         try {
             await boardApi.updateFavouritePosition({ boards: newList })
         } catch (err) {
-            console.log("check err", err)
             alert(err)
         }
     }

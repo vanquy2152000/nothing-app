@@ -13,19 +13,19 @@ const AppLayout = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    checkAuth()
-  }, [navigate])
-
-  const checkAuth = async () => {
-    const user = await authUtils.isAuthenticated()
-    if (!user) {
-      navigate('/login')
-    } else {
-      // save user
-      dispatch(setUser(user))
-      setLoading(false)
+    const checkAuth = async () => {
+      const user = await authUtils.isAuthenticated()
+      if (!user) {
+        navigate('/login')
+      } else {
+        // save user
+        dispatch(setUser(user))
+        setLoading(false)
+      }
     }
-  }
+    checkAuth()
+  }, [navigate, dispatch])
+
 
   return (
     loading ? (
