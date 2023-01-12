@@ -1,9 +1,9 @@
 {
-  "name": "server",
+  "name": "jwt-fullstack-nothing",
   "version": "0.0.1",
   "author": "vanquy",
+  "type":"commonjs",
   "main": "app.js",
-  "private": false,
   "scripts": {
     "start": "nodemon ./bin/www"
   },
