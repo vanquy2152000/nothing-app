@@ -2,8 +2,9 @@
   "name": "jwt-fullstack-nothing",
   "version": "0.0.1",
   "author": "vanquy",
-  "type":"commonjs",
+  "type": "commonjs",
   "main": "app.js",
+  "license": "MIT",
   "scripts": {
     "start": "nodemon ./bin/www"
   },
