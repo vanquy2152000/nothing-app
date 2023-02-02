@@ -35,7 +35,7 @@ const Login = () => {
     setLoading(true)
 
     try {
-      const res = await authApi.login({username, password})
+      const res = await authApi.login({ username, password })
 
       setLoading(false)
       localStorage.setItem('token', res.token)
@@ -43,6 +43,7 @@ const Login = () => {
 
     } catch (err) {
       const errors = err.data.errors
+
       errors.forEach(e => {
         if (e.param === 'username') {
           setUsernameErrText(e.msg)
